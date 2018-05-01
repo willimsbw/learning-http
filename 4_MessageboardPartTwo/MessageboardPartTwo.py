@@ -36,6 +36,9 @@ class MessageHandler(BaseHTTPRequestHandler):
         self.wfile.write(message.encode())
 
     def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html; charset=utf8')
+        self.end_headers()
         form = """
         <!DOCTYPE html>
           <title>Message Board</title>
