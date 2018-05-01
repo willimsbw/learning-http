@@ -19,9 +19,11 @@ form = '''<!DOCTYPE html>
     <button type="submit">Post it!</button>
   </form>
   <pre>
-{}
+    {comments}
   </pre>
 '''
+
+comment_template = '<p>{comment}</p>'
 
 
 class MessageHandler(BaseHTTPRequestHandler):
@@ -54,8 +56,12 @@ class MessageHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         # 2. Put the response together out of the form and the stored messages.
-
+        all_comments = ""
+        for entry in memory:
+            all_comments += comment_template.format(comment = entry)
+        whole_page = form.format(comments = all_comments)
         # 3. Send the response.
+        self.wfile.write(whole_page.encode())
 
 if __name__ == '__main__':
     server_address = ('', 8000)
