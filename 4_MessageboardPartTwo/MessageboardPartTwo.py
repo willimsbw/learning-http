@@ -36,7 +36,7 @@ class MessageHandler(BaseHTTPRequestHandler):
         self.wfile.write(message.encode())
 
     def do_GET(self):
-        var form = """
+        form = """
         <!DOCTYPE html>
           <title>Message Board</title>
           <form method="POST" action="http://localhost:8000/">
@@ -45,7 +45,7 @@ class MessageHandler(BaseHTTPRequestHandler):
             <button type="submit">Post it!</button>
           </form>
         """
-    self.wfile.write(form.encode())
+        self.wfile.write(form.encode())
 
 if __name__ == '__main__':
     server_address = ('', 8000)
