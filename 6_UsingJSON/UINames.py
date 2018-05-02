@@ -17,9 +17,9 @@ def SampleRecord():
     # 1. Add a line of code here to decode JSON from the response.
     json = r.json()
 
-    return "My name is {} {} and the PIN on my card is {}.".format(
+    return "My name is {first} {last} and the PIN on my card is {pin}.".format(
         # 2. Add the correct fields from the JSON data structure.
-
+        
     )
 
 if __name__ == '__main__':
