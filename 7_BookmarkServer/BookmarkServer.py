@@ -126,8 +126,9 @@ class Shortener(http.server.BaseHTTPRequestHandler):
         # Check that the user submitted the form fields.
         if "longuri" not in params or "shortname" not in params:
             # 3. Serve a 400 error with a useful message.
-            #    Delete the following line.
-            raise NotImplementedError("Step 3 isn't written yet!")
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write("Expected query parameters longuri and shortname. Instead received: " + params)
 
         longuri = params["longuri"][0]
         shortname = params["shortname"][0]
@@ -137,14 +138,16 @@ class Shortener(http.server.BaseHTTPRequestHandler):
             memory[shortname] = longuri
 
             # 4. Serve a redirect to the root page (the form).
-            #    Delete the following line.
-            raise NotImplementedError("Step 4 isn't written yet!")
+            self.send_response(303)
+            self.send_header('location', '/')
+            self.end_headers()
         else:
             # Didn't successfully fetch the long URI.
 
             # 5. Send a 404 error with a useful message.
-            #    Delete the following line.
-            raise NotImplementedError("Step 5 isn't written yet!")
+            self.send_response(404)
+            self.end_headers()
+            self.wfile.write("404 error! " + longuri + " doesn't take go anywhere!")
 
 if __name__ == '__main__':
     server_address = ('', 8000)
