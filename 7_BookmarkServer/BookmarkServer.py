@@ -80,13 +80,13 @@ def CheckURI(uri, timeout=5):
     # 1. Write this function.  Delete the following line.
     try:
         r = requests.get(uri, timeout)
+        if r.status_code != 200:
+            return_value = False
+            print("Status code was not 200. Status code: " + r.status_code)
     except requests.exceptions.RequestException as e:
         print e
         return_value = False
 
-    if r.status_code != 200:
-        return_value = False
-        print("Status code was not 200. Status code: " + r.status_code)
 
     return return_value
 
